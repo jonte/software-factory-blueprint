@@ -2,7 +2,7 @@ Configuring QtCreator to use the SDK
 ====================================
 
 After :ref:`the installation of the SDK <installing-sdk>` and :ref:`sourcing the
-environment <sourcing-environment>`, there are a couple of steps to do to run
+environment <sourcing-the-environment>`, there are a couple of steps to do to run
 QtCreator in the SDK environment. This roadmap assumes that the SDK and QtCreator
 are installed and the environment is ``source``\d already.
 
