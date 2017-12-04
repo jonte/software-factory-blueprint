@@ -18,6 +18,7 @@ setup to QtCreator.
 * Select the ``Kits`` tab and click the ``Add`` button.
 
 .. image:: screenshots/add_new_kit.png
+
 * Name your new kit and as ``Device type`` choose ``GenericLinuxOsType``.
 * Then browse and select the path to the sysroot. If you don't know the sysroot
   location you can find it by typing ``echo ${SDKTARGETSYSROOT}`` to the terminal.
@@ -29,6 +30,7 @@ setup to QtCreator.
   should be ``source``\d beforehand.
 
 .. image:: screenshots/add_gcc.png
+
 * Choose the C++ compiler as you did in the previous step. You can find the path by
   typing ``which ${CXX}`` to the terminal. Please note that the terminal should be
   ``source``\d beforehand.
@@ -39,11 +41,13 @@ setup to QtCreator.
   Please note that the terminal should be ``source``\d beforehand.
 
 .. image:: screenshots/sdk_gdb.png
+
 * Choose CMake Tool, if it is not listed in the dropdown menu click the ``Manage..``
   button and add the path to CMake. You can find the path to Cmake with ``which cmake``.
   Please note that the terminal should be ``source``\d beforehand.
 
 .. image:: screenshots/sdk_cmake.png
+
 * If you are working with qmake then it should be added as well. You can find
   the path to qmake with ``which qmake``. Please note that the terminal should be
   ``source``\d beforehand.
@@ -57,10 +61,14 @@ How to open the template service project with QtCreator
 
 * Open QtCreator
 * From the ``File`` menu choose ``New File or Project``
+
 .. image:: screenshots/sdk_newprj.png
+
 * Select ``Import Project`` from the ``Projects`` section
 * Click ``Git Clone`` and then click the ``Choose`` button
+
 .. image:: screenshots/sdk_gitclone.png
+
 * In the window, which just opened, add the repository to the ``Repository section``.
   The git repo for the ``template-library`` is https://github.com/Pelagicore/template-library
 * Select a proper path and add it to the ``Path`` section, then click ``Next``
