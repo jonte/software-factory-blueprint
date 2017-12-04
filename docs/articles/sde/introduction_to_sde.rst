@@ -29,12 +29,12 @@ all software. As stated above, during provisioning an instance of PELUX SDK is
 required in the root directory.
 
 Used environment variables:
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Following is a list of environment variables used by vagrant when provisioning
 the SDE.
 
 * SDK_FILE_NAME: Name of the self-extracting SDK package to install into the
-SDE. Can include wildcards. Defaults to `oecore*toolchain*sh`.
+  SDE. Can include wildcards. Defaults to `oecore*toolchain*sh`.
 * NO_GUI: Will create a headless SDE when set.
 
 
