@@ -1,59 +1,113 @@
 .. _create-a-swf-deployment:
 
-Nomenclature
-************
+Create a SWF deployment
+***********************
 
-* **SWF Platform Blueprint** - Contains the overall roles, responsibilities, process, and instructions involved in working with a Yocto based Linux platform in the IVI domain. A project is intended to use the Blueprint as-is and extend it with a project specific Deployment. Imagine a layered view, where this is the bottom and most generic layer.
-* **SWF Platform Deployment** - A concrete SWF that describes and documents how the project's platform is developed. A SWF Platform Deployment re-uses the SWF Platform Blueprint for the generic parts that are not project specific, i.e. it extends the Blueprint.
-* **Software Factory (SWF)** - This is a term used within the SWF Platform Deployment to refer to itself. This is not additional documentation, but rather a convenient term.
-* **Platform** - The exact content and definition of what a platform is, is project specific.
+This howto describes how to practically go about creating a new instance of a software factory by configuring git, creating directories and indexes.
 
-Structure
-*********
+Create a git repo for the SWF Deployment
+========================================
 
-Incorrect documentation is worse than no documentation at all in many cases, and the requirement on correct content makes the maintenance of the SWF important. The maintenance complexity is assumed to be the most important problem to mitigate, and this affects the way the content is structured and written.
+To create a new SWF Deployment, you first need to create a new repository on your project git server and call it something meaningfull, most probably with the name of the project in it like: "example-software-factory".
 
-The SWF is written and structured in different abstraction levels. The most abstract and over-arching parts are *Processes*. These typically refers various *Instructions* which in turn typically refers to a set of *How-To*'s. *Processes*, *Instructions*, and *How-To*'s could be seen as structured in layers with the most abstract content as top tier. There should be references downwards, e.g. from *Instructions* to *How-To*'s, but as few references upwards as possible. References between articles on the same level are sometimes needed but should be kept to a minimum as well. The reason is that an over-arching process should be possible to change by modifying which *Instructions* and *How-To*'s are referenced and in what order, without needing to modify any (or at least as little as possible) of the less abstract content. Likewise, modifying a *How-To* should not affect any more abstract content that references it, more than absolutely necessary.
+.. code-block:: bash
 
-This is not strictly enforced in any way but it is a guideline for any contribution of content in order to mitigate future maintenance issues.
+    mkdir example-software-factory
+    cd example-software-factory
+    git init
+    git remote add origin <git-url>
+    echo "# example-software-factory" > README.md
+    git add .
+    git commit -m "Initial commit"
+    git push -u origin master
 
-.. blockdiag::
+Add SWF Platform Blueprint as submodule
+=======================================
 
-   diagram {
-     orientation = portrait;
+The blueprint contains a lot of articles of general nature, those can be used to prepopulate the SWF Deployment. To do that the SWF Platform Blueprint needs to be added as a git submodule.
 
-     A [label="Process"];
-     B [label="Instruction"];
-     C [label="Instruction"];
-     D [label="How-To"];
-     E [label="How-To"];
-     F [label="How-To"];
+.. code-block:: bash
 
-     group {
-        color = red;
-        A;
-     }
+    mkdir docs
+    cd docs
+    git submodule add https://github.com/Pelagicore/software-factory-blueprint.git swf-blueprint
+    git add .
+    git commit -m "Add SWF-Blueprint as submodule"
 
-     group {
-        color = blue;
-        B;
-        C;
-     };
+This will create a directory named 'software-factory-blueprint' and check the SWF-Blueprint code out there. By adding and committing this, the checked out version (in this case head of the master branch of the SWF-blueprint) will be used.
 
-     group {
-        color = green;
-        D;
-        E;
-        F;
-     }
+Next time when cloning, it will need an aditional step like this:
 
-     A -- B;
-     A -- C;
-          C -- D;
-          C -- E;
-          C -- F;
-   }
+.. code-block:: bash
 
-* Red block is the *highest* level of abstraction
-* Green block is the next *highest* level of abstraction
-* Blue block is the *lowest* level of abstraction, and thus the most concrete level.
+    git clone --recursive <git-url>
+
+Create skeletal index file
+==========================
+
+One file which needs special attention is the docs/index.rst file, which is the entry point of the new SWD Deployment.
+
+.. code-block:: rst
+
+    Welcome to the Example SWF documentation
+    ****************************************
+    
+    Revision: |release|
+    
+    .. toctree::
+        :caption: Table of contents
+        :maxdepth: 3
+    
+        chapters/example/index
+    
+    .. toctree::
+        :caption: Categories
+        :maxdepth: 1
+    
+        categories/howto.rst
+
+This is just a skeleton which needs to be populated with links to all the articles which should show up.
+
+Set variables and "substitutions"
+=================================
+
+Throughout the SWF Blueprint sometimes words and variables are used which need to be substituded with something else in the SWF Deployment. To be able to use this functionality those variables need to be defined in the docs/swf-substitutions.txt file:
+
+.. code-block:: bash
+
+    # Key=Value. Don't keep '=' in the value
+    # Blank lines and lines starting with # are ignored
+    # Example: proj_name=PELUX
+    
+    proj_name=Example Software Factory
+    example-sdk-binary=test-binary
+
+Add needed files
+================
+
+Normally you only the files config.py and index.rst to create a Sphinx documentation, but we recommend a file structure like this:
+
+.. code-block:: bash
+
+    example-software-factory
+    ├── CMakeLists.txt
+    ├── docs
+    │   ├── categories
+    │   │   ├── howto.rst
+    │   │   ├── instruction.rst
+    │   │   └── process.rst
+    │   ├── chapters
+    │   │   └── example
+    │   │       ├── index.rst
+    │   │       └── my-example.rst
+    │   ├── CMakeLists.txt
+    │   ├── cmake_modules
+    │   │   └── FindSphinx.cmake
+    │   ├── conf.py.in
+    │   ├── index.rst
+    │   ├── swf-blueprint
+    │   └── swf-substitutions.txt
+    └── README.md
+
+The content of the files can be copied and adapted from the PELUX Baseline Software Factory which is one such SWF Deployment. The README.md should contain a description on how to build the project with CMake.
+
