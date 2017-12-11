@@ -19,3 +19,5 @@ An example, and reference, SWF Deployment is the PELUX Baseline SWF Deployment [
     create-an-initial-index
 
 .. [#pelux-swf] http://pelux.io/software-factory
+
+.. tags:: howto

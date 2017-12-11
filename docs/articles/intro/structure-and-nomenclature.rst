@@ -60,3 +60,5 @@ This is not strictly enforced in any way but it is a guideline for any contribut
 * Red block is the *highest* level of abstraction
 * Green block is the next *highest* level of abstraction
 * Blue block is the *lowest* level of abstraction, and thus the most concrete level.
+
+.. tags:: instruction

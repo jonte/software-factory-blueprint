@@ -28,3 +28,5 @@ To create a SWF for your project, see :ref:`create-a-swf-deployment`.
     :hidden:
 
     structure-and-nomenclature
+
+.. tags:: process

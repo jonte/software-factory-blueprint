@@ -111,3 +111,4 @@ Normally you only the files config.py and index.rst to create a Sphinx documenta
 
 The content of the files can be copied and adapted from the PELUX Baseline Software Factory which is one such SWF Deployment. The README.md should contain a description on how to build the project with CMake.
 
+.. tags:: howto
