@@ -3,12 +3,16 @@
 Create a SWF deployment
 ***********************
 
-This howto describes how to practically go about creating a new instance of a software factory by configuring git, creating directories and indexes.
+This howto describes how to practically go about creating a new instance
+of a software factory by configuring git, creating directories and
+indexes.
 
 Create a git repo for the SWF Deployment
 ========================================
 
-To create a new SWF Deployment, you first need to create a new repository on your project git server and call it something meaningfull, most probably with the name of the project in it like: "example-software-factory".
+To create a new SWF Deployment, you first need to create a new repository
+on your project git server and call it something meaningfull, most
+probably with the name of the project in it like: "example-software-factory".
 
 .. code-block:: bash
 
@@ -24,7 +28,9 @@ To create a new SWF Deployment, you first need to create a new repository on you
 Add SWF Platform Blueprint as submodule
 =======================================
 
-The blueprint contains a lot of articles of general nature, those can be used to prepopulate the SWF Deployment. To do that the SWF Platform Blueprint needs to be added as a git submodule.
+The blueprint contains a lot of articles of general nature, those can be
+used to prepopulate the SWF Deployment. To do that the SWF Platform
+Blueprint needs to be added as a git submodule.
 
 .. code-block:: bash
 
@@ -34,7 +40,10 @@ The blueprint contains a lot of articles of general nature, those can be used to
     git add .
     git commit -m "Add SWF-Blueprint as submodule"
 
-This will create a directory named 'software-factory-blueprint' and check the SWF-Blueprint code out there. By adding and committing this, the checked out version (in this case head of the master branch of the SWF-blueprint) will be used.
+This will create a directory named 'software-factory-blueprint' and check
+the SWF-Blueprint code out there. By adding and committing this, the
+checked out version (in this case head of the master branch of the
+SWF-blueprint) will be used.
 
 Next time when cloning, it will need an aditional step like this:
 
@@ -45,7 +54,8 @@ Next time when cloning, it will need an aditional step like this:
 Create skeletal index file
 ==========================
 
-One file which needs special attention is the docs/index.rst file, which is the entry point of the new SWD Deployment.
+One file which needs special attention is the docs/index.rst file, which
+is the entry point of the new SWD Deployment.
 
 .. code-block:: rst
 
@@ -66,12 +76,16 @@ One file which needs special attention is the docs/index.rst file, which is the 
     
         categories/howto.rst
 
-This is just a skeleton which needs to be populated with links to all the articles which should show up.
+This is just a skeleton which needs to be populated with links to all
+the articles which should show up.
 
 Set variables and "substitutions"
 =================================
 
-Throughout the SWF Blueprint sometimes words and variables are used which need to be substituded with something else in the SWF Deployment. To be able to use this functionality those variables need to be defined in the docs/swf-substitutions.txt file:
+Throughout the SWF Blueprint sometimes words and variables are used
+which need to be substituded with something else in the SWF Deployment.
+To be able to use this functionality those variables need to be defined
+in the docs/swf-substitutions.txt file:
 
 .. code-block:: bash
 
@@ -85,7 +99,8 @@ Throughout the SWF Blueprint sometimes words and variables are used which need t
 Add needed files
 ================
 
-Normally you only the files config.py and index.rst to create a Sphinx documentation, but we recommend a file structure like this:
+Normally you only the files config.py and index.rst to create a Sphinx
+documentation, but we recommend a file structure like this:
 
 .. code-block:: bash
 
@@ -109,6 +124,8 @@ Normally you only the files config.py and index.rst to create a Sphinx documenta
     │   └── swf-substitutions.txt
     └── README.md
 
-The content of the files can be copied and adapted from the PELUX Baseline Software Factory which is one such SWF Deployment. The README.md should contain a description on how to build the project with CMake.
+The content of the files can be copied and adapted from the PELUX Baseline
+Software Factory which is one such SWF Deployment. The README.md should
+contain a description on how to build the project with CMake.
 
 .. tags:: howto
